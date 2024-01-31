@@ -68,23 +68,20 @@ void modifiedBubbleSort(int* arr, int len){
 
 // Q4. Insertion sort (incomplete)
 void insertionSort(int* arr, int len){
-    for(int i=0; i<len-1; i++){
+   for(int i=0; i<len-1; i++){
+        int j = i+1; 
         int temp = arr[j];
-        int j = i+1;
         while(j>0){
             if(temp < arr[j-1]){
                 arr[j] = arr[j-1];  // shifting greater values
                 j--;              
             }
             else{
-                arr[j] = temp;
                 break;
             }
-            // TODO: how to handle the case when temp is shifted to index 0
-            
         }
-        
-        }
+        // inserting the element
+        arr[j] = temp;
     }
 }
 
