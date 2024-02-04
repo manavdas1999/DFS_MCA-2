@@ -3,7 +3,7 @@
 02/02/24
 DFS class/lab
 Q1. Check whether a given matrix is sparse or not.
-Q2. Convert a given sparse matrix into coordinate set/3-row triplet representation.
+Q2. Convert a given sparse matrix into coordinate set/3-row triplet representation. (PENDING)
 */
 
 /*
