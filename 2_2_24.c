@@ -11,6 +11,11 @@ Points of struggle:
 1. how to pass and return matrix to/from a function in c.
 */
 
+/*
+TODO:
+1. Learn matrix DS and its implementation.
+*/
+
 #include <stdio.h>
 
 void printMatrix(int n, int arr[][n]){
