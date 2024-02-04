@@ -1,4 +1,8 @@
-// Online C compiler to run C program online
+/*
+31/1/24
+DFS class/Lab
+Q1. Find the second largest element from a given array.
+*/
 #include <stdio.h>
 
 int secondLargest(int* arr, int len){
