@@ -66,7 +66,7 @@ void modifiedBubbleSort(int* arr, int len){
     }
 }
 
-// Q4. Insertion sort (incomplete)
+// Q4. Insertion sort
 void insertionSort(int* arr, int len){
    for(int i=0; i<len-1; i++){
         int j = i+1; 
