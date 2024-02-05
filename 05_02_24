@@ -1,0 +1,75 @@
+// Online C compiler to run C program online
+#include <stdio.h>
+#include <stdlib.h>
+
+int getMax(int *arr, int size){
+    int max = arr[0];
+    for(int i=1;i<size;i++){
+        if(max < arr[i]) max = arr[i];
+    }
+    return max;
+}
+
+void printArray(int *arr, int size){
+    for(int i=0;i<size; i++){
+        printf("%d ", arr[i]);
+    }
+    printf("\n");
+}
+
+int* countSort(int size, int *arr){
+    // step 1: Find the max element in the array
+    int max = getMax(arr, size);
+    
+    // step 2: create a count array of size max+1
+    int *count = (int *) malloc((max+1) * sizeof(int));
+    
+    // step 3: initialize count array to value 0
+    for(int i=0; i<max+1; i++){
+        count[i] = 0;
+    }
+    
+    // step 4: Store the count of every element from original array to the index value of element in count
+    // basically mapping of count of elements
+    for(int i=0;i<size;i++){
+        count[arr[i]]++;
+    }
+    
+    // step 5: store the cumulative count of elements in count(update)
+    // cumulative count => count of previous values added 
+    // NOTE: useful code for cumulative addition
+    for(int i=1; i<max+1;i++){
+        count[i] = count[i] + count[i-1];
+    }
+    
+    // step 6: 
+    // 6.0: create a new sortedArray
+    // 6.1: Traverse the elements original array from the end index
+    // 6.2: go to corresponding index in count
+    // 6.3: reduce the value of element count
+    // 6.4: go to corresponding index at sortedArray
+    // 6.5: feed the value of the element of original array.
+    int *sortedArray = (int *) malloc(size * sizeof(int));
+    for(int i=0; i<size;i++){
+        sortedArray[ --count[ arr[i] ] ] = arr[i];
+    }
+    
+    
+    return sortedArray;
+    // printArray(sortedArray, size);
+    
+}
+
+
+
+int main() {
+    int arr[9] = {1,4,3,1,2,3,6,5,4};
+    
+    printArray(arr, 9);
+    printf("%d\n", getMax(arr, 9));
+    
+    int *sorted = countSort(9, arr);
+    printArray(sorted, 9);
+
+    return 0;
+}
