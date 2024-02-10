@@ -1,4 +1,10 @@
-// Online C compiler to run C program online
+/*
+05/02/24
+DFS class/lab
+Q1. Program to implement Count sort on array
+*/
+
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -50,7 +56,7 @@ int* countSort(int size, int *arr){
     // 6.4: go to corresponding index at sortedArray
     // 6.5: feed the value of the element of original array.
     int *sortedArray = (int *) malloc(size * sizeof(int));
-    for(int i=0; i<size;i++){
+    for(int i=size-1; i>=0;i--){
         sortedArray[ --count[ arr[i] ] ] = arr[i];
     }
     
