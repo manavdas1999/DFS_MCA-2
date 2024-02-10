@@ -1,0 +1,145 @@
+/*
+06/02/24
+DFS class/lab
+Q1. Write a program to implement following operations on a matrix:
+1. addition 2. subtraction 3. multiply 4. transpose
+5. check if matrix is identity matrix
+6. print sum of diagonals of a matrix
+*/
+
+
+
+#include <stdio.h>
+
+void printMatrix(int mat[3][3]){
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            printf("%d ", mat[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+void add(int mat1[3][3], int mat2[3][3]){
+    int res[3][3] = {{0}};
+    for(int i=0; i<3;i++){
+        for(int j=0; j<3;j++){
+            res[i][j] = mat1[i][j] + mat2[i][j];
+        }
+    }
+    
+    // to print resultant
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            printf("%d ", res[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+void subtract(int mat1[3][3], int mat2[3][3]){
+    int res[3][3] = {{0}};
+    for(int i=0; i<3;i++){
+        for(int j=0; j<3;j++){
+            res[i][j] = mat1[i][j] - mat2[i][j];
+        }
+    }
+    
+    // to print resultant
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            printf("%d ", res[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+void multiply(int mat1[3][3], int mat2[3][3]){
+    // multiply is possible if column of mat1 = row of mat2
+    // row of resultant = row of mat1
+    int rowCount = 3;
+    // column of resultant = column of mat2
+    int colCount = 3;
+    
+    int res[3][3] = {{0}};
+    for(int i=0; i<rowCount;i++){
+        for(int j=0; j<colCount;j++){
+            for(int k=0; k<colCount; k++){
+                res[i][j] = res[i][j] + (mat1[i][k] * mat2[k][j]);
+            }
+        }
+    }
+    
+    // to print resultant
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            printf("%d ", res[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+void transpose(int mat[3][3]){
+    int res[3][3] = {{0}};
+    for(int i=0; i<3;i++){
+        for(int j=0; j<3;j++){
+            res[i][j] = mat[j][i];
+        }
+    }
+    
+    // to print resultant
+    for(int i=0;i<3;i++){
+        for(int j=0;j<3;j++){
+            printf("%d ", res[i][j]);
+        }
+        printf("\n");
+    }
+    printf("\n");
+}
+
+int isIdentityMatrix(int mat[3][3]){
+    for(int i=0; i<3;i++){
+        for(int j=0; j<3;j++){
+           if((i==j && mat[i][j] != 1) || (i!=j && mat[i][j] !=0)){
+               return 0;
+           }
+        }
+    }
+    
+    return 1;
+}
+
+int sumOfDiagonals(int mat[3][3]){
+    int sum = 0;
+    int rowCount = 3;
+    for(int i=0; i<rowCount; i++) sum += mat[i][i];
+    return sum;
+}    
+
+
+int main() {
+    // Write C code here
+    int mat1[3][3] = {{1,2,3},{4,5,6},{7,8,9}};
+    int mat2[3][3] = {{1,2,0},{4,0,6},{0,0,9}};
+    int id[3][3] = {{1,0,0},{0,1,0},{0,0,1}};
+    
+    printMatrix(mat1);
+    printMatrix(mat2);
+    add(mat1, mat2);
+    subtract(mat1, mat2);
+    multiply(mat1, mat2);
+    transpose(mat1);
+    printf("%d\n",isIdentityMatrix(mat1));
+    printf("%d\n",isIdentityMatrix(id));
+    
+    printf("sum of diagonals mat1: %d\n",sumOfDiagonals(mat1));
+    printf("sum of diagonals mat2: %d\n",sumOfDiagonals(mat2));
+    printf("sum of diagonals id: %d\n",sumOfDiagonals(id));
+    
+
+    return 0;
+}
