@@ -125,7 +125,7 @@ void insert(struct Node *head, int pos, int value){
         for(int i=1; i<=pos-2; i++){
             if(p == NULL) {
                 printf("\nInvalid Position.\n");
-                break;
+                return;
             }
             p = p->next;
         }
@@ -134,6 +134,72 @@ void insert(struct Node *head, int pos, int value){
         p->next = temp;
     }
 }
+
+int deleteFirst(struct Node *head){
+    if(head == NULL) return 0;
+    int val = head->data;
+    struct Node *p = head;
+    head = head->next;
+    free(p);
+    return val;
+}
+
+int deleteNode(struct Node *head, int pos){
+    struct Node *p = head, *temp;
+    for(int i=1; i<=pos-1; i++){
+        if(p == NULL) {
+                printf("\nInvalid Position.\n");
+                return 0;
+            }
+        p=p->next;
+    }
+    temp = p->next; //deleting node
+    p->next = temp->next;
+    int val = temp->data;
+    free(temp);
+    return val;
+}
+
+int isSorted(struct Node *head){
+    if(head == NULL){
+        printf("\nEMPTY\n");
+        return -1;
+    }
+    if(head->next == NULL) return 0;
+    
+    struct Node *p = head;
+    while(p->next->next != NULL){
+        if(p->data > p->next->data) return 0;
+        p=p->next;
+    }
+    return 1;
+}
+
+void arrayReverse(struct Node *head){
+    // size of linked list
+    int size = count(head);
+    int *arr = (int*)malloc(size * sizeof(int));
+    if(count == 0){
+        printf("\nEMPTY\n");
+        return;
+    }
+    struct Node *p = head;
+    // store value of LL to an array
+    for(int i=0; i<size; i++){
+        arr[i] = p->data;
+        p=p->next;
+    }
+    
+    p = head;
+    for(int i=size-1; i>=0; i--){
+        p->data = arr[i];
+        p=p->next;
+    }
+}
+
+// TODO: reverse using sliding pointers technique
+// TODO: sort
+// TODO: remove duplicate
 
 int main() {
     
@@ -163,15 +229,20 @@ int main() {
     
     insert(head, 2, 22);
     append(head, 11);
-    insertAtFirst(head, 12);
-     display(head);
+    // insertAtFirst(head, 12);
+    display(head);
+    
+    // TODO: deleteAtFIrst not working properly
+    // printf("%d\n", deleteFirst(head));
+    deleteNode(head, 3);
+    display(head);
+    
+    printf("%d\n", isSorted(head));
+    
+    arrayReverse(head);
+    display(head);
 
     
-        // struct Node *t = head; //both point ar first node
-    // while(t != NULL){
-    //     printf("%d ", t->data);
-    //     t = t->next; // moving forward
-    // }
 
     
     return 0;
