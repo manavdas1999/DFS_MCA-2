@@ -56,6 +56,70 @@ void display(struct Node* head){
     printf("\n");
 }
 
+
+int count(struct Node* head){
+   if(head == NULL) return 0;
+   int count = 0;
+   struct Node* temp=head;
+   do{
+       count++;
+       temp=temp->next;
+   }while(temp != head);
+   
+   return count;
+}
+
+
+struct Node* insertAtHead(struct Node* head, int data){
+    // // two pointer approach
+    struct Node* temp = head;
+    do{
+        temp=temp->next;
+    }while(temp->next != head);  // stop at tail node
+    temp->next = createNode(data);
+    temp=temp->next; // temp on new node
+    temp->next = head;
+    head = temp;
+    return head;
+}
+
+void insertBetween(struct Node* head, int pos, int data){
+    // count + 1 as we can add in the end
+    if(pos <=0 || pos>count(head)+1) printf("\nInvalid position!\n");
+    else{
+        struct Node* temp = head;
+        for(int i=0; i<pos-2; i++) temp=temp->next;
+        struct Node* newNode = createNode(data);
+        newNode->next = temp->next;
+        temp->next = newNode;
+    }
+}
+
+struct Node* deleteAtHead(struct Node* head){
+    struct Node* temp = head;
+    struct Node* del = head;
+    do{
+        temp=temp->next;
+    }while(temp->next != head);
+    head=head->next; // new head
+    temp->next = head; //points to new head
+    free(del);
+    
+    return head;
+}
+
+void deleteBetween(struct Node* head, int pos){
+    if(pos <=0 || pos>count(head)) printf("\nInvalid position!\n");
+    else{
+        struct Node* temp = head;
+        struct Node* del;
+        for(int i=0; i<pos-2; i++) temp=temp->next;
+        del = temp->next;
+        temp->next = del->next;
+        free(del);
+    }
+}
+
 int main() {
  
     struct Node *head = NULL;
@@ -71,6 +135,13 @@ int main() {
     int values[] = {1,2,3,4};
     head = createFromArray(values, 4);
     display(head);
+    insertBetween(head, 5, 11);
+    // deleteBetween(head, 2);
+    head = insertAtHead(head, 20);
+    display(head);
+    head = deleteAtHead(head);
+    display(head);
+    printf("%d", count(head));
     return 0;
 }
 
