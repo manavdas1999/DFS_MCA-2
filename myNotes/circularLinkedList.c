@@ -15,6 +15,7 @@ struct Node* createNode(int data){
 }
 
 struct Node* createFromArray(int arr[], int size){
+    // // two pointer approach (head is fixed (incoming end), tail is moving (outgoing end))
     struct Node* head = NULL;
     struct Node* tail = NULL;
     
@@ -29,15 +30,28 @@ struct Node* createFromArray(int arr[], int size){
         tail = tail->next;
         tail->next = head;
     }
-    
     return head;
+    
+    // // tail pointer approach(tail is moving (outgoing end))
+    // first node
+    // struct Node* tail = createNode(arr[0]);
+    // tail->next = tail;
+    // for(int i = 1; i<size; i++){
+    //     struct Node* newNode = createNode(arr[i]);
+    //     newNode->next = tail->next; // tail->next holds outgoing end
+    //     tail->next = newNode;
+    //     tail = tail->next; // tail forward moves
+    // }
+    
+    // return tail;
 }
 
 void display(struct Node* head){
     struct Node* temp = head;
     do{
+        // temp = temp->next; // for tail approach
         printf("%d ", temp->data);
-        temp = temp->next;
+        temp = temp->next; // 2 pointer approach
     }while(temp != head);
     printf("\n");
 }
