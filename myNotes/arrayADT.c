@@ -99,29 +99,34 @@ int linearSearch(struct Array *arr, int element){
     return -1;
 }
 
-int binerySearch(struct Array *arr, int element){
+int binarySearch(struct Array *arr, int element){
     int low = 0;
     int high = arr->length-1;
     while(low <= high){
         int mid = (low+high)/2;
         if(arr->a[mid] == element) return mid;
-        else if(arr->a[mid] < element) high = mid-1;
-        else if(arr->a[mid] > element) low = mid+1;
+        else if(arr->a[mid] < element) low = mid+1;
+        else if(arr->a[mid] > element) high = mid-1;
     }
     return -1;
 }
 
-int binarySearchRecursion(struct Array *arr,int low, int high, int target){
+int binarySearchRecursion(struct Array *arr, int target){
+
+int search(struct Array *arr,int low, int high, int target){
     if(low > high) return -1;
     
     int mid = low + (high-low)/2;
     
     if(arr->a[mid] == target) return mid;
-    if(arr->a[mid] < target) return binarySearchRecursion(&arr, mid+1, high, target);
-    else return binarySearchRecursion(&arr, low, mid-1, target);
+    if(arr->a[mid] < target) return search(arr, mid+1, high, target);
+    else return search(arr, low, mid-1, target);
 }
 
-void bubbleSort(Array *arr) {
+return search(arr, 0, arr->length-1, target);
+}
+
+void bubbleSort(struct Array *arr) {
     int i, j;
     int n = arr->length;
     for (i = 0; i < n - 1; i++) {
@@ -137,7 +142,7 @@ void bubbleSort(Array *arr) {
     }
 }
 
-void selectionSort(Array *arr) {
+void selectionSort(struct Array *arr) {
     int i, j, minIndex;
     int n = arr->length;
     // Move boundary of unsorted subarray one by one
@@ -156,7 +161,7 @@ void selectionSort(Array *arr) {
     }
 }
 
-void insertionSort(Array *arr) {
+void insertionSort(struct Array *arr) {
     int i, key, j;
     int n = arr->length;
     for (i = 1; i < n; i++) {
@@ -172,7 +177,7 @@ void insertionSort(Array *arr) {
     }
 }
 
-int secondLargest(Array *arr) {
+int secondLargest(struct Array *arr) {
     int first, second;
     int n = arr->length;
 
@@ -285,6 +290,16 @@ int main() {
     display(&myArr);
     
     printf("\n%d", isSorted(&myArr));
+    
+    printf("\n%d ",secondLargest(&myArr));
+    
+    
+    
+    insertionSort(&myArr);
+    display(&myArr);
+    
+    printf("\n%d", binarySearch(&myArr, 30));
+    printf("\n%d", binarySearchRecursion(&myArr, 30));
 
     return 0;
 }
