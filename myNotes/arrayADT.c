@@ -1,18 +1,13 @@
 /*
 Array ADT
 */
-
-
 #include <stdio.h>
 #include <stdlib.h>
 
 struct Array{
-    // Method 1: Pointer approach
     int *a;
-    // Method 2: static array
-    // int a[10];
-    int size; //max size (declared at initialization)
-    int length; // current number of elements
+    int size; 
+    int length; 
 };
 
 void initialize(struct Array *arr, int size){
@@ -104,7 +99,6 @@ int linearSearch(struct Array *arr, int element){
     return -1;
 }
 
-// works only for sorted array
 int binerySearch(struct Array *arr, int element){
     int low = 0;
     int high = arr->length-1;
@@ -116,6 +110,100 @@ int binerySearch(struct Array *arr, int element){
     }
     return -1;
 }
+
+int binarySearchRecursion(struct Array *arr,int low, int high, int target){
+    if(low > high) return -1;
+    
+    int mid = low + (high-low)/2;
+    
+    if(arr->a[mid] == target) return mid;
+    if(arr->a[mid] < target) return binarySearchRecursion(&arr, mid+1, high, target);
+    else return binarySearchRecursion(&arr, low, mid-1, target);
+}
+
+void bubbleSort(Array *arr) {
+    int i, j;
+    int n = arr->length;
+    for (i = 0; i < n - 1; i++) {
+        // Last i elements are already in place
+        for (j = 0; j < n - i - 1; j++) {
+            // Swap if the element found is greater than the next element
+            if (arr->a[j] > arr->a[j + 1]) {
+                int temp = arr->a[j];
+                arr->a[j] = arr->a[j + 1];
+                arr->a[j + 1] = temp;
+            }
+        }
+    }
+}
+
+void selectionSort(Array *arr) {
+    int i, j, minIndex;
+    int n = arr->length;
+    // Move boundary of unsorted subarray one by one
+    for (i = 0; i < n - 1; i++) {
+        // Find the minimum element in unsorted array
+        minIndex = i;
+        for (j = i + 1; j < n; j++) {
+            if (arr->a[j] < arr->a[minIndex]) {
+                minIndex = j;
+            }
+        }
+        // Swap the found minimum element with the first element
+        int temp = arr->a[minIndex];
+        arr->a[minIndex] = arr->a[i];
+        arr->a[i] = temp;
+    }
+}
+
+void insertionSort(Array *arr) {
+    int i, key, j;
+    int n = arr->length;
+    for (i = 1; i < n; i++) {
+        key = arr->a[i];
+        j = i - 1;
+        // Move elements of arr[0..i-1], that are greater than key,
+        // to one position ahead of their current position
+        while (j >= 0 && arr->a[j] > key) {
+            arr->a[j + 1] = arr->a[j];
+            j = j - 1;
+        }
+       arr->a[j + 1] = key;
+    }
+}
+
+int secondLargest(Array *arr) {
+    int first, second;
+    int n = arr->length;
+
+    // Ensure that the array has at least two elements
+    if (n < 2) {
+        printf("Array should have at least two elements\n");
+        return -1;
+    }
+
+    // Initialize the first and second largest elements
+    if (arr->a[0] > arr->a[1]) {
+        first = arr->a[0];
+        second = arr->a[1];
+    } else {
+        first = arr->a[1];
+        second = arr->a[0];
+    }
+
+    // Traverse the array to find the first and second largest elements
+    for (int i = 2; i < n; i++) {
+        if (arr->a[i] > first) {
+            second = first;
+            first = arr->a[i];
+        } else if (arr->a[i] > second && arr->a[i] != first) {
+            second = arr->a[i];
+        }
+    }
+
+    return second;
+}
+
 
 int sum(struct Array *arr){
     int sum=0;
