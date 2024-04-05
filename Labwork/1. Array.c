@@ -1,5 +1,18 @@
 /*
 Array ADT
+1. Write A C Program to Perform These Operation on An Array.
+1.	Traverse
+2.	Insert
+3.	Delete
+4.	Linear Search
+5.	Binary Search
+6.	Binary Search Using Recursion
+7.	Bubble Sort
+8.	Insertion Sort
+9.	Selection Sort
+10.	Find Second Largest Element in Array
+11.	Shuffle
+12.	Exit 
 */
 #include <stdio.h>
 #include <stdlib.h>
