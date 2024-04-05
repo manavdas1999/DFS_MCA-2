@@ -10,7 +10,6 @@ Write A C Program to Perform Following Operation on Matrix
 7.	Exit.
 
 */
-
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -166,7 +165,7 @@ int main() {
     printf("is identity matrix? %d\n", isIdentityMatrix(m1));
     
     printf("Matrix 2: \n");
-    initializeMatrix(m1);
+    initializeMatrix(m2);
     
     Matrix *sumResult = addMatrix(m1,m2);
     Matrix *diffResult = subtractMatrix(m1,m2);
